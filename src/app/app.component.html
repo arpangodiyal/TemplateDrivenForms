@@ -1,0 +1,147 @@
+<div class="container">
+  <h1>Bootcamp Enrollment Form</h1>
+
+  <form #userForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+
+    {{userForm.value | json}}
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email address</label>
+      <input
+        required
+        type="email"
+        class="form-control"
+        id="email"
+        placeholder="name@example.com"
+        name="email"
+        [(ngModel)]="userModel.email"
+        #email="ngModel"
+        [class.is-invalid]="email.touched && email.invalid"
+      />
+      <small *ngIf="email.touched && email.invalid" style="color:red;">
+        Email is invalid
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input
+        required
+        type="text"
+        class="form-control"
+        id="phone"
+        name="phone"
+        [(ngModel)]="userModel.phone"
+        #phone="ngModel"
+        pattern="^\d{10}$"
+        [class.is-invalid]="phone.touched && phone.invalid"
+      />
+      <div *ngIf="phone.touched && phone.invalid">
+        <small *ngIf="phone.errors.required"> Phone number is required</small>
+        <small *ngIf="phone.errors.pattern"> Phone number should be of 10 digits</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        [(ngModel)]="userModel.course"
+        name="course"
+        required
+        #course="ngModel"
+        [class.is-invalid]="course.touched && course.invalid"
+      >
+        <option value='' selected>Open this select menu</option>
+        <option *ngFor="let topic of topics">
+          {{topic}}
+        </option>
+      </select>
+      <small class="text-danger" *ngIf="course.touched && course.invalid && course.errors.required">
+        Please select a course
+      </small>
+    </div>
+
+    <div class="mb-3">
+      <label>Shift</label>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          id="shift"
+          value="Morning"
+          checked
+          [(ngModel)]="userModel.shift"
+          name="timePreference"
+        />
+        <label class="form-check-label" for="shift">
+          Morning
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          [(ngModel)]="userModel.shift"
+          value="Evening"
+          name="timePreference"
+          id="shift"
+        />
+        <label class="form-check-label" for="shift">
+          Evening
+        </label>
+      </div>
+    </div>
+
+    <div ngModelGroup="address">
+      <div class="mb-3">
+        <label for="street" class="form-label">Street</label>
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          name="street"
+          [(ngModel)]="userModel.address.street"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">City </label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          name="city"
+          [(ngModel)]="userModel.address.city"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="state" class="form-label">State </label>
+        <input
+          type="text"
+          class="form-control"
+          id="state"
+          name="state"
+          [(ngModel)]="userModel.address.state"
+        />
+      </div>
+    </div>
+
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value=""
+        id="flexCheckDefault"
+        [(ngModel)]="userModel.sendPromotion"
+        name="sendPromotion"
+      />
+      <label class="form-check-label" for="flexCheckDefault">
+        Send promotional offers
+      </label>
+    </div>
+
+    <button [disabled]="userForm.form.invalid" type="submit" class="btn btn-primary">
+      Submit
+    </button>
+  </form>
+</div>
