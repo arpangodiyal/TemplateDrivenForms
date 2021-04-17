@@ -18,7 +18,7 @@ export class AppComponent  {
     state:'Delhi'
   }
 
-  userModel = new User('Rob@test.com', '1122334455', 'Angular', 'Morning', true, this.userAddress);
+  userModel = new User('Rob@test.com', '11223344', 'Angular', 'Morning', true, this.userAddress);
 
   showValue(data){
     console.log(data);
