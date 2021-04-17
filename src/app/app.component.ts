@@ -25,7 +25,7 @@ export class AppComponent  {
     console.log(this.email2);
   }
 
-  onSubmit(){
-    console.log(this.userModel);
+  onSubmit(data){
+    console.log(data);
   }
 }
